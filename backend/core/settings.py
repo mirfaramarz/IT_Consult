@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'Accounts',
     'rest_framework_simplejwt',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -143,4 +144,4 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'mir.faramarz1@gmail.com'
-EMAIL_HOST_PASSWORD = 'Mir@00000'
+EMAIL_HOST_PASSWORD = 'cdowimkkgkjpjjcr'

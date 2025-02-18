@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import './Login.css'; // Make sure to create this CSS file
 import backgroundImage from '../../assets/img/contact-1.png';  // Add this line
 import TopNavbar from '../../components/Nav/TopNavbar';  // Add this import
+import axios from 'axios'; // Import axios for API calls
 
 function Login() {
   const [username, setUsername] = useState('');
@@ -12,6 +13,7 @@ function Login() {
   const [signupEmail, setSignupEmail] = useState('');
   const [signupPassword, setSignupPassword] = useState('');
   const [error, setError] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const { login } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -36,7 +38,26 @@ function Login() {
 
   const handleSignUp = async (e) => {
     e.preventDefault();
-    // Implement signup logic here
+    setError('');
+    setSuccessMessage('');
+
+    try {
+      if (!signupName || !signupEmail || !signupPassword) {
+        throw new Error('Please fill in all fields');
+      }
+
+      const response = await axios.post('http://localhost:8000/register/', {
+        username: signupName,
+        email: signupEmail,
+        password: signupPassword,
+      });
+
+      setSuccessMessage(response.data.message); // Show success message
+      // Optionally, redirect to login or another page
+      // navigate('/login');
+    } catch (error) {
+      setError(error.response?.data?.error || 'Registration failed. Please try again.');
+    }
   };
 
   const toggleForm = () => {
@@ -67,6 +88,7 @@ function Login() {
           <div className="form sign-in">
             <h2>Welcome Back</h2>
             {error && <div className="error-message">{error}</div>}
+            {successMessage && <div className="success-message">{successMessage}</div>}
             <form onSubmit={handleSignIn}>
               <label>
                 <span>Username</span>

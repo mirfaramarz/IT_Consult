@@ -59,7 +59,7 @@ class RegisterView(generics.CreateAPIView):
 
         # Send verification email
         subject = 'Email Verification'
-        verification_link = request.build_absolute_uri(f'/api/verify-email/{token}/')  # Adjust the URL as needed
+        verification_link = request.build_absolute_uri(f'/verify-email/{token}/')  # Adjust the URL as needed
         message = f'Please verify your email by clicking on the following link: {verification_link}'
         send_mail(subject, message, 'from@example.com', [data["email"]])  # Replace 'from@example.com' with your sender email
 
@@ -96,5 +96,5 @@ class EmailVerificationView(generics.GenericAPIView):
             user.is_verified = True
             user.verification_token = None  # Clear the token after verification
             user.save()
-            return Response({"message": "Email verified successfully"}, status=status.HTTP_200_OK)
+            return Response({"message": "Email verified successfully", "redirect": "/dashboard"}, status=status.HTTP_200_OK)
         return Response({"error": "Invalid token"}, status=status.HTTP_400_BAD_REQUEST)
