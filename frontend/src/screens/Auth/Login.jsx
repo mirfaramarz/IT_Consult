@@ -46,7 +46,7 @@ function Login() {
         throw new Error('Please fill in all fields');
       }
 
-      const response = await axios.post('http://localhost:8000/register/', {
+      const response = await axios.post('http://localhost:8000/accounts/register/', {
         username: signupName,
         email: signupEmail,
         password: signupPassword,

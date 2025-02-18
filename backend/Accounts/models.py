@@ -11,6 +11,7 @@ class CustomUser(AbstractUser):
     user_type = models.CharField(max_length=10, choices=USER_TYPES, default="free")
     verification_token = models.CharField(max_length=32, null=True, blank=True)
     is_verified = models.BooleanField(default=False)
+    email = models.EmailField(unique=True)
 
     def __str__(self):
         return self.username

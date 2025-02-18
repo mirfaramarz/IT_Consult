@@ -10,6 +10,7 @@ import Login from "./screens/Auth/Login.jsx";
 import Register from "./screens/Auth/Register.jsx";
 import Dashboard from "./screens/Dashboard.jsx";
 import EmailVerification from './screens/Auth/EmailVerification';
+import EmailConfirmation from './screens/Auth/EmailConfirmation.jsx';
 
 export default function App() {
   return (
@@ -25,6 +26,7 @@ export default function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/verify-email/:token" element={<EmailVerification />} />
+          <Route path="/confirm-email/:token" element={<EmailConfirmation />} />
           <Route element={<ProtectedRoute />}>
             <Route path="/dashboard" element={<Dashboard />} />
           </Route>
